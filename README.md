@@ -1,116 +1,116 @@
-﻿# EnrollMate Technical Review Extract
+﻿# Estratto di revisione tecnica di EnrollMate
 
-This repository is a focused technical-review extract of EnrollMate for academic evaluation.
+Questo repository è un estratto mirato alla revisione tecnica di EnrollMate per valutazione accademica.
 
-It is not the full private production repository. Secrets, `.env.local`, generated build output, deployment state, private data, and unrelated product modules are intentionally excluded.
+Non si tratta del repository privato completo di produzione. I segreti, `.env.local`, gli artefatti di build generati, lo stato di deployment, i dati privati e i moduli di prodotto non pertinenti sono esclusi intenzionalmente.
 
-## Project Criteria Covered
+## Criteri di progetto coperti
 
-### Application Type
+### Tipo di applicazione
 
-EnrollMate is a multi-page application (MPA) built with Next.js App Router.
+EnrollMate è una **multi-page application (MPA)** costruita con Next.js App Router.
 
-The review extract includes separate pages for:
+L’estratto di revisione include pagine separate per:
 
-- Registration
+- Registrazione
 - Login
-- Auth callback
+- Callback di autenticazione
 - Logout
-- Dashboard redirect/session handling
-- User profile management
+- Redirect dashboard / gestione sessione
+- Gestione del profilo utente
 
-### RESTful User APIs
+### API utente RESTful
 
-The extract includes the REST endpoints required for user management:
+L’estratto include gli endpoint REST necessari per la gestione utenti:
 
 - `POST /api/auth/register`
 - `POST /api/auth/login`
 - `POST /api/auth/logout`
 - `GET /api/auth/me`
 
-These endpoints use Supabase Auth, Zod validation, structured JSON responses, and server-side session handling.
+Questi endpoint usano Supabase Auth, validazione con Zod, risposte JSON strutturate e gestione della sessione lato server.
 
 ### Frontend
 
-The frontend uses React with Next.js App Router.
+Il frontend usa React con Next.js App Router.
 
-Included UI areas:
+Aree UI incluse:
 
-- Registration form
-- Login form
-- Magic-link login form
-- Turnstile security field
-- Password-strength checklist
-- Profile form
-- Email update form
-- Password update form
-- Logout button
-- Language switcher
-- Theme toggle
+- Form di registrazione
+- Form di login
+- Form di login con magic link
+- Campo di sicurezza Turnstile
+- Checklist della robustezza della password
+- Form del profilo
+- Form aggiornamento email
+- Form aggiornamento password
+- Pulsante di logout
+- Selettore lingua
+- Toggle del tema
 
-### Frontend State
+### Stato frontend
 
-Zustand is included for focused client-side UI state:
+Zustand è incluso per uno stato client-side mirato dell’interfaccia:
 
 - `src/stores/chat-ui-store.ts`
 - `src/stores/onboarding-store.ts`
 
-The stores handle UI interaction state such as language, drafts, voice/transcription state, streaming state, onboarding step, organization-name draft, and generated slug.
+Gli store gestiscono lo stato di interazione UI come lingua, bozze, stato voce/trascrizione, stato di streaming, step di onboarding, bozza del nome organizzazione e slug generato.
 
-Server-owned data remains in Supabase and is not stored in Zustand.
+I dati di proprietà del server restano in Supabase e non vengono memorizzati in Zustand.
 
 ### Server Actions
 
-The extract includes the shared Server Action helper:
+L’estratto include l’helper condiviso per le Server Action:
 
 - `src/lib/actions/action.ts`
 
-It centralizes:
+Centralizza:
 
-- Zod validation
-- Auth checks
-- Role checks
-- Optional fresh-session verification
-- Context-aware Supabase client selection
-- Structured error handling
+- Validazione Zod
+- Controlli di autenticazione
+- Controlli di ruolo
+- Verifica opzionale di sessione fresca
+- Selezione del client Supabase in base al contesto
+- Gestione strutturata degli errori
 
-Profile, login, registration, and onboarding actions use this helper where appropriate.
+Le action di profilo, login, registrazione e onboarding usano questo helper dove appropriato.
 
-### Extra API Functionality
+### Funzionalità API aggiuntive
 
-The additional user-profile feature is included:
+È inclusa anche la funzionalità extra per il profilo utente:
 
-- Update display name
-- Update preferred language
-- Change email
-- Change password with current-password verification
+- Aggiornamento del nome visualizzato
+- Aggiornamento della lingua preferita
+- Cambio email
+- Cambio password con verifica della password corrente
 
-### Documentation
+### Documentazione
 
-The complete `docs/` folder is included for architectural review.
+L’intera cartella `docs/` è inclusa per la revisione architetturale.
 
-## What Is Intentionally Excluded
+## Cosa è escluso intenzionalmente
 
 - `.env.local`
-- API keys and secrets
+- API key e segreti
 - `node_modules`
 - `.next`
-- Supabase local runtime state
-- Full enrolment-concierge modules not needed for the school criteria
-- Full private repository history
-- Production data
+- Stato runtime locale di Supabase
+- Moduli completi di enrolment-concierge non necessari per i criteri della scuola
+- Cronologia completa del repository privato
+- Dati di produzione
 
-## Suggested Review Order
+## Ordine consigliato di revisione
 
-1. Read `docs/architecture.md`.
-2. Read `PROJECT-README.md` for the full product summary.
-3. Review `src/app/api/auth/`.
-4. Review `src/app/auth/`.
-5. Review `src/app/dashboard/profile/`.
-6. Review `src/lib/actions/action.ts`.
-7. Review `src/stores/`.
-8. Review the focused tests under `src/test/`.
+1. Leggere `docs/architecture.md`.
+2. Leggere `PROJECT-README.md` per il riepilogo completo del prodotto.
+3. Esaminare `src/app/api/auth/`.
+4. Esaminare `src/app/auth/`.
+5. Esaminare `src/app/dashboard/profile/`.
+6. Esaminare `src/lib/actions/action.ts`.
+7. Esaminare `src/stores/`.
+8. Esaminare i test focalizzati sotto `src/test/`.
 
-## Notes
+## Note
 
-This extract is meant for code review and presentation, not as a standalone deployable application. Some imports may reference framework or project context that exists in the full private repository.
+Questo estratto è pensato per code review e presentazione, non come applicazione deployabile autonoma. Alcuni import possono fare riferimento a contesto di framework o di progetto presente nel repository privato completo.
